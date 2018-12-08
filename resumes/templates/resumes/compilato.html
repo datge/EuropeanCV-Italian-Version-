@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<link href="/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<link href="/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+
+	</head>
+	<style>
+		.titolini {
+			font-size:13px;
+		}
+		.bordo-destro {
+			border-right: 1px solid;
+			
+		}
+		.bordo-sinistro {
+			border-left: 1x solid;
+		}
+		.titolo {
+			font-weight:bold;
+			font-size:15px;
+		}
+		
+			
+		.intertitolo {
+			font-weight: bold;
+			font-size:13px;
+			padding-top:25px;
+
+		}
+		.dati {
+			font-weight:bold;
+			font-size:13px;
+		}
+		.center {
+			margin: auto;
+			width: 60%;
+			border: 3px solid #73AD21;
+			padding: 20px;
+		}
+		
+	</style>
+<body>
+	<div class="pos-f-t">
+	  <div class="collapse" id="navbarToggleExternalContent">
+		<div class="bg-dark p-4">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
+		</div>
+	  </div>
+	</div>
+	<div class="container-fluid center">
+		 <div class="row">
+			<div class="col">
+					<table class="table table-responsive text-right">
+							<div class="text-right">
+						
+                                <tr>
+                                    <td class="bordo-destro"><div class="titolo">Formato europeo<br>
+                                        per il curriculum<br>
+                                        vitae
+                                        <br><img src="C:\Users\a\Desktop\CV\resumes\static\resumes\europa.png" alt="europa" width="50px"class="img-thumbnail"></div>
+                                    </td>
+                                </tr>
+                                <tr class=>
+                                    <td><div class="intertitolo">Informazioni Personali </div></td>
+                                </tr>
+                                <tr class="bordo">
+									{%if info.foto_tessera.name %}
+                                    	<td class="bordo-destro"><div class="titolini"><img src="{{info.foto_tessera.file}}" width="150px"class="img-thumbnail"></div></td>
+									{%else%}
+										<td class="bordo-destro"><div class="titolini"><img src="C:\Users\dav-2\Documents\CV\profile\media\profile_image\WhatsApp_Image_2018-07-18_at_00.55.52_nSdidjA.jpeg" width="150px"class="img-thumbnail"></div></td>
+									{% endif %}
+
+                                </tr>
+                                <tr>
+                                    <td class="bordo-destro">
+                                        <div class="titolini ">Nome e Cognome
+                                        </div>
+                                    </td>
+                                    <td class="dati text-left">{{info.nome}}</td>
+                                </tr>
+                                <tr>
+                                        <td class="bordo-destro"><div class="titolini bordo">Indirizzo</div></td>
+                                        <td class="dati text-left ">{{info.indirizzo}}</td>
+                                    </tr>
+
+                                <tr>
+                                    <td class="bordo-destro"><div class="titolini bordo">Telefono</div></td>
+                                    <td class="dati text-left">{{info.telefono}}</td>
+                                </tr>
+                                <tr >
+                                    <td class="bordo-destro"><div class="titolini bordo">Fax</div></td>
+                                    <td class="dati text-left">{{info.fax}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bordo-destro"><div class="titolini">Email</div></td>
+                                    <td class="dati text-left">{{info.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bordo-destro"><div class="titolini">Nazionalità</div></td>
+                                    <td class="dati text-left">{{info.nazionalita}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bordo-destro"><div class="titolini">Madrelingua</div></td>
+                                    <td class="dati text-left">{{info.madre_lingua}}</td>
+                                </tr>
+                                <tr class="bordo">
+                                    <td class="bordo-destro"><div class="titolini">Data di Nascita</div></td>
+                                    <td class="dati text-left">{{info.data_di_nascita}} </td>
+                                </tr>
+
+
+
+
+							</div>
+					
+							<div class="text-right ">
+								{%for lavoro in lavori%}
+									{% if  lavoro.data_da_a and   lavoro.nome_datore and  lavoro.tipo_azienda and  lavoro.tipo_impiego and  lavoro.principali_mansioni %}
+										<tr>
+											<td><div class="intertitolo">Esperienza Lavorative </div></td>
+										</tr>
+
+										<tr >
+											<td class="bordo-destro"><div class="titolini">Date (da - a)</div></td>
+											<td class="dati text-left">{{lavoro.data_da_a}}</td>
+										</tr>
+										<tr>
+											<td class="bordo-destro"><div class="titolini">Nome del datore di lavoro</div></td>
+											<td class="dati text-left">{{ lavoro.nome_datore}}</td>
+										</tr>
+										<tr>
+											<td class="bordo-destro"><div class="titolini">Tipo di azienda e settore</div></td>
+											<td class="dati text-left">{{lavoro.tipo_azienda}}</td>
+										</tr>
+										<tr>
+											<td class="bordo-destro"><div class="titolini">Tipo di impiegoo</div></td>
+											<td class="dati text-left">{{lavoro.tipo_impiego}}</td>
+										</tr>
+										<tr>
+											<td class="bordo-destro"><div class="titolini">Principali mansioni e<br>responsabilità</div></td>
+											<td class="dati text-left">{{lavoro.principali_mansioni}}</td>
+										</tr>
+									{% endif %}
+								{%endfor%}
+
+							</div>
+							<div class="text-right ">
+								{%for istruzione in istruzioni%}
+									{%if istruzione.data_da_a and istruzione.materia_studio and istruzione.nome_formazione and istruzione.punteggio and istruzione.qualifica%}
+										<tr>
+											<td ><div class="intertitolo">Istruzione e Formazione
+
+												</div>
+											</td>
+											
+										</tr>
+									
+										<tr>
+											<td class="bordo-destro"><div class="titolini">Date (da - a) </div></td>
+											<td class="dati text-left">{{ istruzione.data_da_a}}</td>
+										</tr>
+										<tr>
+											<td class="bordo-destro"><div class="titolini">Nome e tipo di istituto di<br>istruzione o formazione</div></td>
+											<td class="dati text-left">{{istruzione.nome_formazione}}</td>
+										</tr>
+										<tr>
+											<td class="bordo-destro"><div class="titolini">Principali materie/ abilità<br> professionali oggetto dello studio</div></td>
+											<td class="dati text-left">{{ istruzione.materia_studio}}</td>
+										</tr>
+										<tr>
+											<td class="bordo-destro"><div class="titolini">Qualifica conseguita</div></td>
+											<td class="dati text-left">{{istruzione.qualifica}}</td>
+										</tr>
+										<tr>
+											<td class="bordo-destro"><div class="titolini">Livello nella classificazione<br> nazionale ,se pertinente</div></td>
+											<td class="dati text-left">{{ istruzione.punteggio}}</td>
+										</tr>
+									{% endif %}
+								{%endfor%}
+
+
+							</div>
+
+							<div class="text-right ">
+								{%for lingua in lingue%}
+									{%if lingua.nome_lingua and lingua.lettura and lingua.scrittura and lingua.orale%}
+								
+										<tr>
+											<td><div class="intertitolo">Capacità e competenze personali</div></td>
+										</tr>
+										<tr >
+											<td class="bordo-destro"><div class="titolini">Altre Lingue</div></td>
+											<td class="dati text-left">{{lingua.nome_lingua}}</td>
+										</tr>
+										<ul>
+											<tr>
+												<td class="bordo-destro"><div class="titolini"><li>Capacità di letture</li></div></td>
+												<td class="dati text-left">{{lingua.lettura}}</td>
+											</tr>
+											<tr>
+												<td class="bordo-destro"><div class="titolini"><li>Capacità di scrittura</li></div></td>
+												<td class="dati text-left">{{lingua.scrittura}}</td>
+											</tr>
+											<tr>
+												<td class="bordo-destro"><div class="titolini"><li>Capacità di espressione orale</li></div></td>
+												<td class="dati text-left">{{ lingua.orale}}</td>
+											</tr>
+										</ul>
+									{% endif %}
+								{% endfor %}
+				
+
+								
+							</div>
+							<div class="text-right ">
+
+							{%if relazionali.descrizione_rela%}	
+								<tr>
+									<td ><div class="intertitolo">Capacità e competenze relazionali</div></td>
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Vivere e lavorare con altre<br> persone, in ambiente<br> multiculturale, occupando posti<br> in cui la comunicazione è<br> importante e in situazioni in cui<br> è essenziale lavorare in squadra<br> (ad es. cultura e sport), ecc.</div></td>
+                                    <td class="dati text-left">{{ relazionali.descrizione_rela}}</td>
+								</tr>
+							{% endif %}
+								
+							</div>
+							<div class="text-right ">
+							{%if organizzative.descrizione_orga%}
+								<tr>
+									<td ><div class="intertitolo">Capacità e competenze organizzative</div></td>
+									
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Ad es. coordinamento e<br> amministrazione di persone,<br> progetti, bilanci; sul posto di<br> lavoro, in attività di volontariato<br> (ad es. cultura e sport), a casa,<br> ecc.</div></td>
+									<td class="dati text-left">{{organizzative.descrizione_orga}}</td>
+							
+								</tr>
+							{% endif %}
+								
+							</div>
+							<div class="text-right ">
+							{%if tecniche.descrizione_tecniche%}
+								<tr>
+									<td ><div class="intertitolo">Capacità e competenze tecniche</div></td>
+					
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Con computer, attrezzature<br> specifiche, macchinari, ecc</div></td>
+									<td class="dati text-left">{{tecniche.descrizione_tecniche}}</td>
+								</tr>
+							{% endif %}
+							</div>
+							<div class="text-right ">
+							{%if artistiche.descrizione_artistiche%}	
+								<tr>
+									<td ><div class="intertitolo">Capacità e competenze e artistiche</div></td>
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Musica, scrittura, disegno ecc</div></td>
+                                    <td class="dati text-left">{{artistiche.descrizione_artistiche}}</td>
+								</tr>
+							{% endif %}
+							</div>
+							<div class="text-right ">
+							{%if altre.descrizione_altre %}
+								<tr>
+									<td ><div class="intertitolo">Altre capacità e competenze</div></td>
+									
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Competenze non<br> precedentemente indicate.</div></td>
+									<td class="dati text-left">{{altre.descrizione_altre}}</td>
+								</tr>
+							{% endif %}
+							</div>
+							<div class="text-right ">
+							{%if info.patenti%}
+								<tr>
+									<td ><div class="intertitolo">Patente o Patenti</div></td> 
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">
+									</td>
+								
+									<td class="dati text-left">{{info.patenti}}</td> 
+								</tr>
+							{% endif %}
+								
+							</div>
+							<div class="text-right ">
+							{%if altre_info.altre_informazioni%}
+								<tr>
+									<td ><div class="intertitolo">Ulteriori informazioni</div></td>
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">
+									</td>
+									<td class="dati text-left">{{altre_info.altre_informazioni}}</td> 
+								</tr>
+							{% endif %}	
+							</div>
+					</table>
+					
+			</div>
+
+		</div>
+	</div>
+	
+</body>
+</html>

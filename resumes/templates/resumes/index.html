@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	{% load bootstrap4 %}
+	{% load bootstrap3 %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CV</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<link href="/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<link href="/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script>
+	
+	<script>
+		var url ='http://127.0.0.1:8000/data'
+		var i=0;
+		var bottone_lavoro;
+		var contatore_lavoro=0;
+		var contatore_formazione=0;
+		var contatore_lingua=0;
+		var bottone_formazione;
+		var lista_lavori=[];
+		var dizionario_lavori = []
+		var lista_formazioni=[]
+		var dizionario_formazione = []
+		var bottone_lingue;
+		var lista_lingue=[];
+		var dizionario_lingue = []
+		
+		function setup(){
+
+			text_nome = select("#id_nome")
+			text_indirizzo = select("#id_indirizzo")
+			text_telefono = select("#id_telefono")
+			text_fax = select("#id_fax")
+			text_email = select("#id_email")
+			text_nazionalita = select("#id_nazionalita")
+			text_made_lingua = select("#id_madre_lingua")
+			text_data = select("#id_data_di_nascita")
+
+			text_nome.class("form-control")
+			text_indirizzo.class("form-control")
+			text_telefono.class("form-control")
+			text_fax.class("form-control")
+			text_email.class("form-control")
+			text_nazionalita.class("form-control")
+			text_made_lingua.class("form-control")
+			text_data.class("form-control")
+
+
+			
+			textare_info = select("#id_altre_informazioni")
+			textare_info.class("form-control")
+			text_patenti =  select("#id_patenti")
+			text_patenti.class("form-control")
+			text_descrizioni_altre = select("#id_descrizione_altre")
+			text_artistiche = select("#id_descrizione_artistiche")
+			text_artistiche.class("form-control")
+
+			
+			text_tecniche = select("#id_descrizione_tecniche")
+			text_tecniche.class("form-control")
+			text_organizzative = select("#id_descrizione_orga")
+			text_organizzative.class("form-control")
+			text_relazionai = select("#id_descrizione_rela")
+			text_relazionai.class("form-control")
+			text_altre_capacita = select("#id_descrizione_altre")
+			text_altre_capacita.class("form-control")
+
+			text_lavoro_da_a = select("#id_form0-data_da_a")
+			text_lavoro_nome = select("#id_form0-nome_datore")
+			text_lavoro_azienda = select("#id_form0-tipo_azienda")
+			text_lavoro_impiego = select("#id_form0-tipo_impiego")
+			text_lavoro_mansioni = select("#id_form0-principali_mansioni")
+
+			text_lavoro_da_a.class("form-control")
+			text_lavoro_nome.class("form-control")
+			text_lavoro_azienda.class("form-control")
+			text_lavoro_impiego.class("form-control")
+			text_lavoro_mansioni.class("form-control")
+
+			text_formazione_da_a = select("#id_data_da_a")
+			text_formazione_nome = select("#id_nome_formazione")
+			text_formazione_materia = select("#id_materia_studio")
+			text_formazione_qualifica = select("#id_qualifica")
+			text_formazione_punteggio = select("#id_punteggio")
+
+			text_formazione_da_a.class("form-control")
+			text_formazione_nome.class("form-control")
+			text_formazione_materia.class("form-control")
+			text_formazione_qualifica.class("form-control")
+			text_formazione_punteggio.class("form-control")
+
+			text_lingue_nome = select("#id_nome_lingua")
+			text_lingue_lettura = select("#id_lettura")
+			text_lingue_scrittura = select("#id_scrittura")
+			text_lingue_orale =  select("#id_orale")
+
+			text_lingue_nome.class("form-control")
+			text_lingue_lettura.class("form-control")
+			text_lingue_scrittura.class("form-control")
+			text_lingue_orale.class("form-control")
+
+
+			bottone_lavoro = select("#id_button_lavoro")
+			bottone_formazione =  select ("#id_button_formazione")
+			bottone_lingue = select("#id_button_lingue")
+			bottone_submit =  select("#id_submit")
+			
+			bottone_lavoro.mousePressed(cambiato_lavoro)
+	
+			bottone_formazione.mousePressed(cambiato_formazione)
+
+			bottone_lingue.mousePressed(cambiato_lingua)
+
+			bottone_submit.mousePressed(invia_temp)
+			
+		}
+
+		
+		function cambiato_lavoro(){
+			print("cliccato lavoro")
+			contatore_lavoro = contatore_lavoro+1
+
+			var lavoro =    
+					'<div class = "text-right"><table class="table table-responsive text-right  center2" ><tr>\
+						<td class="bordo-destro"><div class="titolini">Date (da - a)</div></td>\
+						<td class="dati text-left ">{{ form1.data_da_a.errors }}<input type="text" name="formlav'+contatore_lavoro+'-data_da_a" maxlength="50" id="id_formlav'+contatore_lavoro+'-data_da_a" class="form-control"></td><br>\
+					</tr>\
+					<tr>\
+						<td class="bordo-destro"><div class="titolini">Nome del datore di lavoro</div></td>\
+						<td class="dati text-left">{{ form1.nome_datore.errors }}<input type="text" name="formlav'+contatore_lavoro+'-nome_datore" maxlength="100" id="id_formlav'+contatore_lavoro+'-nome_datore" class="form-control"></td>\
+					</tr>\
+					<tr>\
+						<td class="bordo-destro"><div class="titolini">Tipo di azienda e settore</div></td>\
+						<td class="dati text-left">{{ form1.tipo_azienda.errors }}<input type="text" name="formlav'+contatore_lavoro+'-tipo_azienda" maxlength="100" id="id_formlav'+contatore_lavoro+'-tipo_azienda" class="form-control"></td>\
+					</tr>\
+					<tr>\
+						<td class="bordo-destro"><div class="titolini">Tipo di impiegoo</div></td>\
+						<td class="dati text-left">{{ form1.tipo_impiego.errors }}<input type="text" name="formlav'+contatore_lavoro+'-tipo_impiego" maxlength="100" id="id_formlav'+contatore_lavoro+'-tipo_impiego" class="form-control"></td>\
+					</tr>\
+					<tr>\
+						<td class="bordo-destro"><div class="titolini">Principali mansioni e<br>responsabilità</div></td>\
+						<td class="dati text-left">{{ form1.principali_mansioni.errors }}<input type="text" name="formlav'+contatore_lavoro+'-principali_mansioni" maxlength="100" id="id_formlav'+contatore_lavoro+'-principali_mansioni" class="form-control"></td>\
+					</div></table></tr>';
+			var asd = {
+					data:$('#id_formlav'+(contatore_lavoro-1)+'-data_da_a').val(),
+					nome:$('#id_formlav'+(contatore_lavoro-1)+'-nome_datore').val(),
+					tipo_azienda:$('#id_formlav'+(contatore_lavoro-1)+'-tipo_azienda').val(),
+					tipo_impiego:$('#id_formlav'+(contatore_lavoro-1)+'-tipo_impiego').val(),
+					principali_mansioni:$('#id_formlav'+(contatore_lavoro-1)+'-principali_mansioni').val(),
+					
+			};
+				
+			lista_lavori.push(asd)
+
+			
+					
+			document.getElementById("id_lavoros").innerHTML = document.getElementById("id_lavoros").innerHTML+lavoro
+
+			for (var i=1;lista_lavori.length;i++){
+				document.getElementById('id_formlav'+i+'-data_da_a').value=lista_lavori[i].data
+				document.getElementById('id_formlav'+i+'-nome_datore').value=lista_lavori[i].nome
+				document.getElementById('id_formlav'+i+'-tipo_azienda').value=lista_lavori[i].tipo_azienda
+				document.getElementById('id_formlav'+i+'-tipo_impiego').value=lista_lavori[i].tipo_impiego
+				document.getElementById('id_formlav'+i+'-principali_mansioni').value=lista_lavori[i].principali_mansioni
+			}	
+		
+			
+			
+		}
+		
+		function cambiato_formazione(){
+			print("cliccato formazione")
+			contatore_formazione=contatore_formazione+1
+			var formazione =    
+							'<div class = "text-right"><table class="table table-responsive text-right  center3" ><tr>\
+								<td class="bordo-destro"><div class="titolini">Date (da - a)</div></td>\
+								<td class="dati text-left">{{ form2.data_da_a.errors }}<input type="text" name="formforma'+contatore_formazione+'-data_da_a" maxlength="50" id="id_formforma'+contatore_formazione+'-data_da_a" class="form-control"></td><br>\
+							</tr>\
+							<tr>\
+								<td class="bordo-destro"><div class="titolini">Nome e tipo di istituto di<br>istruzione o formazione</div></td>\
+								<td class="dati text-left">{{ form2.nome_formazione.errors }}<input type="text" name="formforma'+contatore_formazione+'-nome_formazione" maxlength="100" id="id_formforma'+contatore_formazione+'-nome_formazione" class="form-control"></td>\
+							</tr>\
+							<tr>\
+								<td class="bordo-destro"><div class="titolini">Principali materie/ abilità<br> professionali oggetto dello studio</div></td>\
+								<td class="dati text-left">{{ form2.materia_studio.errors }}<input type="text" name="formforma'+contatore_formazione+'-materia_studio" maxlength="100" id="id_formforma'+contatore_formazione+'-materia_studio" class="form-control"></td>\
+							</tr>\
+							<tr>\
+								<td class="bordo-destro"><div class="titolini">Qualifica conseguita</div></td>\
+								<td class="dati text-left">{{ form2.qualifica.errors }}<input type="text" name="formforma'+contatore_formazione+'-qualifica" maxlength="100" id="id_formforma'+contatore_formazione+'-qualifica" class="form-control"></td>\
+							<tr>\
+								<td class="bordo-destro"><div class="titolini">Livello nella classificazione<br> nazionale ,se pertinente</div></td>\
+								<td class="dati text-left">{{ form2.punteggio.errors }}<input type="text" name="formforma'+contatore_formazione+'-punteggio" maxlength="100" id="id_formforma'+contatore_formazione+'-punteggio" class="form-control"></td>\
+							</tr>\
+							</div></table></tr>';
+			var formazione_temp = {
+				data:$('#id_formforma'+(contatore_formazione-1)+'-data_da_a').val(),
+				nome:$('#id_formforma'+(contatore_formazione-1)+'-nome_formazione').val(),
+				materia_studio:$('#id_formforma'+(contatore_formazione-1)+'-materia_studio').val(),
+				qualifica:$('#id_formforma'+(contatore_formazione-1)+'-qualifica').val(),
+				punteggio:$('#id_formforma'+(contatore_formazione-1)+'-punteggio').val(),
+								
+			};
+			lista_formazioni.push(formazione_temp)
+
+			console.log('id_formforma'+(contatore_formazione-1)+'-data_da_a')
+					
+			console.log(contatore_formazione)
+
+			document.getElementById("id_formaziones").innerHTML = document.getElementById("id_formaziones").innerHTML+formazione
+
+			for (var i=1;lista_formazioni.length;i++){
+				document.getElementById('id_formforma'+i+'-data_da_a').value=lista_formazioni[i].data
+				document.getElementById('id_formforma'+i+'-nome_formazione').value=lista_formazioni[i].nome
+				document.getElementById('id_formforma'+i+'-materia_studio').value=lista_formazioni[i].materia_studio
+				document.getElementById('id_formforma'+i+'-qualifica').value=lista_formazioni[i].qualifica
+				document.getElementById('id_formforma'+i+'-punteggio').value=lista_formazioni[i].punteggio
+			}	
+
+		}
+
+		function cambiato_lingua(){
+			print("cloccato lingua")
+			contatore_lingua = contatore_lingua +1
+			var lingue =    
+							'<div class = "text-right"><table class="table table-responsive text-right  center3" ><tr>\
+								<td class="bordo-destro"><div class="titolini">Altre Lingue</div></td>\
+								<td class="dati text-left">{{ form3.nome_lingua.errors }}<input type="text" name="formlingua'+contatore_lingua+'-nome_lingua" maxlength="100" id="id_formlingua'+contatore_lingua+'-nome_lingua" class="form-control"></td>\
+							</tr>\
+							<ul>\
+								<tr>\
+									<td class="bordo-destro"><div class="titolini"><li>Capacità di letture</li></div></td>\
+									<td class="dati text-left">{{ form3.lettura.errors }}\
+										<select name=""formlingua'+contatore_lingua+'-lettura"" id="id_formlingua'+contatore_lingua+'-lettura" class="form-control">\
+  											<option value="" selected>---------</option>\
+  											<option value="Elementare">Elementare</option>\
+  											<option value="Buono">Buono</option>\
+  											<option value="Eccellente">Eccellente</option>\
+										</select>\
+									</td>\
+								</tr>\
+								<tr>\
+									<td class="bordo-destro"><div class="titolini"><li>Capacità di scrittura</li></div></td>\
+									<td class="dati text-left">{{ form3.scrittura.errors }}{{form3.scrittur}}\
+										<select name=""formlingua'+contatore_lingua+'-scrittura"" id="id_formlingua'+contatore_lingua+'-scrittura" class="form-control">\
+  										<option value="" selected>---------</option>\
+  										<option value="Elementare">Elementare</option>\
+  										<option value="Buono">Buono</option>\
+  										<option value="Eccellente">Eccellente</option></select>\
+									</td>\
+								</tr>\
+								<tr>\
+									<td class="bordo-destro"><div class="titolini"><li>Capacità di espressione orale</li></div></td>\
+									<td class="dati text-left">{{ form3.orale.errors }}{{form3.oral}}\
+										<select name=""formlingua'+contatore_lingua+'-orale"" id="id_formlingua'+contatore_lingua+'-orale" class="form-control">\
+  										<option value="" selected>---------</option>\
+  										<option value="Elementare">Elementare</option>\
+  										<option value="Buono">Buono</option>\
+  										<option value="Eccellente">Eccellente</option></select>\
+									</td>\
+								<tr>\
+							</ul></div></table>';
+			var lingua_temp = {
+				nome:$('#id_formlingua'+(contatore_lingua-1)+'-nome_lingua').val(),
+				lettura :$('#id_formlingua'+(contatore_lingua-1)+'-lettura option:selected').val(),
+				scrittura:$('#id_formlingua'+(contatore_lingua-1)+'-scrittura').val(),
+				orale:$('#id_formlingua'+(contatore_lingua-1)+'-orale').val(),
+			}
+			
+			lista_lingue.push(lingua_temp)
+			console.log(lingua_temp)
+			
+			document.getElementById("id_lingues").innerHTML = document.getElementById("id_lingues").innerHTML + lingue
+			for (var i=1;lista_lingue.length;i++){
+				
+				document.getElementById('id_formlingua'+i+'-nome_lingua').value=lista_lingue[i].nome
+				document.getElementById('id_formlingua'+i+'-lettura').value=lista_lingue[i].lettura
+				document.getElementById('id_formlingua'+i+'-scrittura').value=lista_lingue[i].scrittura
+				document.getElementById('id_formlingua'+i+'-orale').value=lista_lingue[i].orale
+				
+			}	
+		}
+
+		function invia_temp(){
+			
+			console.log("contatore_lavoro: " + contatore_lavoro)
+			for (var i=0;i<=contatore_lavoro;i++){
+				var asd = {
+					data:$('#id_formlav'+(i)+'-data_da_a').val(),
+					nome:$('#id_formlav'+(i)+'-nome_datore').val(),
+					tipo_azienda:$('#id_formlav'+(i)+'-tipo_azienda').val(),
+					tipo_impiego:$('#id_formlav'+(i)+'-tipo_impiego').val(),
+					principali_mansioni:$('#id_formlav'+(i)+'-principali_mansioni').val(),
+				}
+				dizionario_lavori[i]=asd
+			}
+			
+			console.log(dizionario_lavori)
+			console.log("contatore_formazione: "+ contatore_formazione)
+			for (var i=0;i<=contatore_formazione;i++){
+				var formazione_temp = {
+					data:$('#id_formforma'+(i)+'-data_da_a').val(),
+					nome:$('#id_formforma'+(i)+'-nome_formazione').val(),
+					materia_studio:$('#id_formforma'+(i)+'-materia_studio').val(),
+					qualifica:$('#id_formforma'+(i)+'-qualifica').val(),
+					punteggio:$('#id_formforma'+(i)+'-punteggio').val(),
+									
+				}
+				dizionario_formazione[i]=formazione_temp
+			}
+			console.log(dizionario_formazione)	
+			for (var i=0;i<=contatore_lingua;i++){
+				var lingue_temp = {
+					nome:$('#id_formlingua'+(i)+'-nome_lingua').val(),
+					lettura:$('#id_formlingua'+(i)+'-lettura').val(),
+					scrittura:$('#id_formlingua'+(i)+'-scrittura').val(),
+					orale:$('#id_formlingua'+(i)+'-orale').val(),
+				}
+				dizionario_lingue[i]=lingue_temp
+			}	
+							
+			
+
+			$.ajax({
+				method: 'POST',
+				url:'http://127.0.0.1:8000/temp/',
+				data:{
+					lista:dizionario_lavori,
+					lavori:contatore_lavoro,
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+					},
+
+				success: function (data) {
+					
+					console.log(dizionario_lavori)
+				}
+				
+				
+			})
+			//aggiungere ajax and etc...
+			$.ajax({
+				method: 'POST',
+				url:'http://127.0.0.1:8000/temp_formazione/',
+				data:{
+					lista:dizionario_formazione,
+					formazioni:contatore_formazione,
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+					},
+
+				success: function (data) {
+					
+					console.log(dizionario_lavori)
+				}
+				
+				
+			})
+			$.ajax({
+				method: 'POST',
+				url:'http://127.0.0.1:8000/temp_lingue/',
+				data:{
+					lista:dizionario_lingue,
+					lingue:contatore_lingua,
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+					},
+
+				success: function (data) {
+					
+					console.log(dizionario_lingue)
+				}
+				
+				
+			})
+		}
+
+		
+	
+
+	</script>
+
+	</head>
+	<style>
+
+		.titolini {
+			font-size:13px;
+		}
+		.bordo-destro {
+			border-right: 1px solid;
+			
+		}
+		.spazio{
+			padding-top:5px;
+		}
+		.bordo-sinistro {
+			border-left: 1px solid;
+		}
+		.titolo {
+			font-weight:bold;
+			font-size:15px;
+		}
+		
+			
+		.intertitolo {
+			font-weight: bold;
+			font-size:13px;
+			padding-top:25px;
+
+		}
+		.dati {
+			font-weight:bold;
+			font-size:13px;
+		}
+		.center {
+			margin: auto;
+			width: 60%;
+
+			padding: 20px;
+		}
+		.center2 {
+			margin: auto;
+			width: 77.5%;
+	
+		}
+		.center3 {
+			margin: auto;
+			width: 87.7%;
+
+		}
+	</style>
+<body>
+		
+	<div class="pos-f-t">
+		<div class="collapse" id="navbarToggleExternalContent">
+		<div class="bg-dark p-4">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
+		</div>
+		</div>
+	  <nav class="navbar navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+	  </nav>
+	</div>
+	<div class="container-fluid center">
+		 <div class="row">
+			<div class="col">
+					<table class="table table-responsive text-right">
+						<form id="MyForm" action="{%url 'resumes:index' %}" method = 'POST' enctype="multipart/form-data">
+							{% csrf_token %}
+							<div class="text-right">
+
+								
+                                <tr>
+                                    <td class="bordo-destro"><div class="titolo">Formato europeo<br>
+                                        per il curriculum<br>
+                                        vitae
+                                        <br><img src="{% static "resumes/europa.png" %}" alt="europa" width="50px"class="img-thumbnail"></div>
+                                    </td>
+                                </tr>
+                                <tr class=>
+                                    <td><div class="intertitolo">Informazioni Personali </div></td>
+                                </tr>
+                                <tr class="bordo">
+                                    <td class="bordo-destro"><div class="titolini bordo">Foto:</div></td>
+                                    <td class="dati text-left ">{{ form.foto_tessera}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bordo-destro">
+                                        <div class="titolini ">Nome e Cognome
+                                        </div>
+                                    </td>
+                                    <td class="dati text-left">{{ form.nome.errors }}{{form.nome}}</td>
+                                </tr>
+                                <tr>
+                                        <td class="bordo-destro"><div class="titolini bordo">Indirizzo</div></td>
+                                        <td class="dati text-left ">{{ form.indirizzo.errors }}{{form.indirizzo}}</td>
+                                    </tr>
+
+                                <tr>
+                                    <td class="bordo-destro"><div class="titolini bordo">Telefono</div></td>
+                                    <td class="dati text-left">{{ form.telefono.errors }}{{form.telefono}}</td>
+                                </tr>
+                                <tr >
+                                    <td class="bordo-destro"><div class="titolini bordo">Fax</div></td>
+                                    <td class="dati text-left">{{ form.fax.errors }}{{form.fax}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bordo-destro"><div class="titolini">Email</div></td>
+                                    <td class="dati text-left">{{ form.email.errors }}{{form.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bordo-destro"><div class="titolini">Nazionalità</div></td>
+                                    <td class="dati text-left">{{ form.nazionalita.errors }}{{form.nazionalita}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bordo-destro"><div class="titolini">Madrelingua</div></td>
+                                    <td class="dati text-left">{{ form.madre_lingua.errors }}{{form.madre_lingua}}</td>
+                                </tr>
+                                <tr class="bordo">
+                                    <td class="bordo-destro"><div class="titolini">Data di Nascita</div></td>
+                                    <td class="dati text-left">{{ form.data_di_nascita.errors }}{{form.data_di_nascita}} </td>
+                                </tr>
+
+
+
+
+							</div>
+							
+								
+								<div class="text-right">
+									
+									<tr>
+										<td><div class="intertitolo">Esperienza Lavorativa <br><button type="button" id="id_button_lavoro" class="btn btn-info btn-sm">Aggiungi</button></div></td>
+									</tr>
+									<tr >
+										<td class="bordo-destro"><div class="titolini">Date (da - a)</div></td>
+										<td class="dati text-left">{{ form1.data_da_a.errors }}{{form1.data_da_a}}</td>
+									</tr>
+									<tr>
+										<td class="bordo-destro"><div class="titolini">Nome del datore di lavoro</div></td>
+										<td class="dati text-left">{{ form1.nome_datore.errors }}{{form1.nome_datore}}</td>
+									</tr>
+									<tr>
+										<td class="bordo-destro"><div class="titolini">Tipo di azienda e settore</div></td>
+										<td class="dati text-left">{{ form1.tipo_azienda.errors }}{{form1.tipo_azienda}}</td>
+									</tr>
+									<tr>
+										<td class="bordo-destro"><div class="titolini">Tipo di impiegoo</div></td>
+										<td class="dati text-left">{{ form1.tipo_impiego.errors }}{{form1.tipo_impiego}}</td>
+									</tr>
+									<tr>
+										<td class="bordo-destro"><div class="titolini">Principali mansioni e<br>responsabilità</div></td>
+										<td class="dati text-left">{{ form1.principali_mansioni.errors }}{{form1.principali_mansioni}}</td>
+									</tr>
+									<tr>
+									
+									</tr>
+									
+								
+								<div class="text-right">
+									<tr>
+										<td id="id_lavoros" colspan="2" class="text-right">
+
+										</td>
+									</tr>
+								</div>					
+								</div>
+						
+						
+										
+							
+									
+										
+									
+
+								
+										
+				
+
+							
+								
+								
+						
+
+
+
+							
+							<div class="text-right ">
+								
+								<tr>
+									<td ><div class="intertitolo">Instruzione e Formazione
+											<button type="button" class="btn btn-info btn-sm" id="id_button_formazione">
+												<img src="open-iconic-master/png/plus.png"> Aggiungi</button>
+										</div>
+									</td>
+									
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Date (da - a) </div></td>
+									<td class="dati text-left">{{ form2.data_da_a.errors }}{{form2.data_da_a}}</td>
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Nome e tipo di istituto di<br>istruzione o formazione</div></td>
+									<td class="dati text-left">{{ form2.nome_formazione.errors }}{{form2.nome_formazione}}</td>
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Principali materie/ abilità<br> professionali oggetto dello studio</div></td>
+									<td class="dati text-left">{{ form2.materia_studio.errors }}{{form2.materia_studio}}</td>
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Qualifica conseguita</div></td>
+									<td class="dati text-left">{{ form2.qualifica.errors }}{{form2.qualifica}}</td>
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Livello nella classificazione<br> nazionale ,se pertinente</div></td>
+									<td class="dati text-left">{{ form2.punteggio.errors }}{{form2.punteggio}}</td>
+								</tr>
+								<div class="text-right">
+									<tr>
+										<td id="id_formaziones" colspan="2" class="text-right">
+
+										</td>
+									</tr>
+								</div>		
+
+
+							</div>
+
+							<div class="text-right ">
+								
+								<tr>
+									<td><div class="intertitolo">Capacità e competenze personali<br><button type="button" class="btn btn-info btn-sm" id="id_button_lingue"><img src="open-iconic-master/png/plus.png"> Aggiungi</button></div></td>
+								</tr>
+								<tr >
+									<td class="bordo-destro"><div class="titolini">Altre Lingue</div></td>
+                                    <td class="dati text-left">{{ form3.nome_lingua.errors }}{{form3.nome_lingua}}</td>
+								</tr>
+								<ul>
+									<tr>
+										<td class="bordo-destro"><div class="titolini"><li>Capacità di letture</li></div></td>
+										<td class="dati text-left">{{ form3.lettura.errors }}{{form3.lettura}}</td>
+									</tr>
+									<tr>
+										<td class="bordo-destro"><div class="titolini"><li>Capacità di scrittura</li></div></td>
+										<td class="dati text-left">{{ form3.scrittura.errors }}{{form3.scrittura}}</td>
+									</tr>
+									<tr>
+										<td class="bordo-destro"><div class="titolini"><li>Capacità di espressione orale</li></div></td>
+										<td class="dati text-left">{{ form3.orale.errors }}{{form3.orale}}</td>
+									</tr>
+								</ul>
+
+								<div class="text-right">
+									<tr>
+										<td id="id_lingues" colspan="2" class="text-right">
+
+										</td>
+									</tr>
+								</div>
+
+								
+							</div>
+							<div class="text-right ">
+								
+								<tr>
+									<td ><div class="intertitolo">Capacità e competenze relazionali</div></td>
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Vivere e lavorare con altre<br> persone, in ambiente<br> multiculturale, occupando posti<br> in cui la comunicazione è<br> importante e in situazioni in cui<br> è essenziale lavorare in squadra<br> (ad es. cultura e sport), ecc.</div></td>
+                                    <td class="dati text-left">{{ form4.descrizione_rela.errors }}{{form4.descrizione_rela}}</td>
+								</tr>
+								
+							</div>
+							<div class="text-right ">
+								
+								<tr>
+									<td ><div class="intertitolo">Capacità e competenze organizzative</div></td>
+									
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Ad es. coordinamento e<br> amministrazione di persone,<br> progetti, bilanci; sul posto di<br> lavoro, in attività di volontariato<br> (ad es. cultura e sport), a casa,<br> ecc.</div></td>
+									<td class="dati text-left">{{ form5.descrizione_orga.errors }}{{form5.descrizione_orga}}</td>
+									
+
+								</tr>
+								
+							</div>
+							<div class="text-right ">
+								
+								<tr>
+									<td ><div class="intertitolo">Capacità e competenze tecniche</div></td>
+					
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Con computer, attrezzature<br> specifiche, macchinari, ecc</div></td>
+									<td class="dati text-left">{{ form6.descrizione_tecniche.errors }}{{form6.descrizione_tecniche}}</td>
+								</tr>
+								
+							</div>
+							<div class="text-right ">
+								
+								<tr>
+									<td ><div class="intertitolo">Capacità e competenze e artistiche</div></td>
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Musica, scrittura, disegno ecc</div></td>
+                                    <td class="dati text-left">{{ form7.descrizione_artistiche.errors }}{{form7.descrizione_artistiche}}</td>
+								</tr>
+								
+							</div>
+							<div class="text-right ">
+								
+								<tr>
+									<td ><div class="intertitolo">Altre capacità e competenze</div></td>
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">Competenze non<br> precedentemente indicate.</div></td>
+									<td class="dati text-left">{{ form8.descrizione_altre.errors }}{{form8.descrizione_altre}}</td>
+								</tr>
+								
+							</div>
+							<div class="text-right ">
+								
+								<tr>
+									<td ><div class="intertitolo">Patente o Patenti</div></td> 
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">
+									</td>
+								
+									<td class="text-left">{{form.patenti.errors}}{{form.patenti}}</td> 
+								</tr>
+						
+								
+							</div>
+							<div class="text-right ">
+								
+								<tr>
+									<td ><div class="intertitolo">Ulteriori informazioni</div></td>
+									
+								</tr>
+								<tr>
+									<td class="bordo-destro"><div class="titolini">
+									</td>
+									<td class="dati text-left ">{{ form9.altre_informazioni.errors }}{{form9.altre_informazioni}}</td>
+								</tr>
+								
+							</div>
+					      
+						<div class="text-right ">
+								
+								<tr>
+									<td ><button name="submit" id="id_submit" class="btn btn-primary btn-md">invia</button></td>
+								</tr>
+								
+							</div>
+                        </form>
+					
+					</table>
+					
+			</div>
+
+		</div>
+	</div>
+	
+</body>
+</html>
